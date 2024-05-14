@@ -1,0 +1,322 @@
+/* author: Charles Millard
+https://codepen.io/cmillard/pen/eYaYewX
+*/
+:root {
+	--defaultFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	--garageWhite: rgba(235, 237, 236, 1);
+}
+
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+		
+[type=submit], [type=reset], button, html [type=button] {
+	-webkit-appearance: button;
+	text-transform: none;
+}
+		
+html, body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	font-family: var(--defaultFont);
+	font-weight: 300;
+}
+
+body {
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+	color: var(--garageWhite);
+			
+	display: grid;
+	place-items: center;
+			
+	transition: all 200ms ease;
+	overflow-x: hidden;
+			
+	background: hsla(228deg, 12.2%, 8.04%, 1);
+}
+
+.lightTheme {
+	background: rgba(235, 236, 240, 1);
+}
+
+.radial-ring-container {
+	--borderRadius: .856em;
+	--borderRadiusBefore: .867em;
+	--offset: 0%;
+	--blurAmount: 12px;
+	--saturateAmount: 120%;
+	--contrastAmount: 1.05;
+	--brightnessAmount: 1.1;
+	--backgroundSize: 250% 100%;
+	--backgroundPosition: 50% 50%;
+	--backangle: 127deg;
+	--doubleHeight: var(--bheight);
+	--doubleWidth: var(--bwidth);
+	
+	--color01: #1598fc;
+	--color02: #18ecfd;
+	--color03: #26f0ba;
+	--color04: #e6d05a;
+	--color05: #fb9f56;
+	--color06: #fa6984;
+	--color07: #838ce1;
+	--color08: #1598fc;
+	--color09: #fadd81;
+	--color10: #8cfa97;
+	--color11: #06d4d1;
+	--color12: #16b0b0; /* ending coloring for match to front for repeat */
+	
+	position: relative;
+	content: "";
+	width: 100%;
+	max-width: 175px;
+	height: 100%;
+	max-height: 55px;
+	transition: background 150ms ease;
+	border-radius: var(--borderRadius);
+	transition: all 200ms linear;
+}
+
+.lightTheme .radial-ring-container {
+	border-top: 1px solid rgba(255, 255, 255, .6);
+	border-left: 1px solid rgba(255, 255, 255, .6);
+	border-right: 1px solid rgba(255, 255, 255, .6);
+	border-bottom: 2px solid rgba(255, 255, 255, .6);
+}
+
+.radial-ring-container:hover {
+	cursor: pointer;
+	transform: scale(1.03);
+}
+
+.radial-ring-container:active {
+	transform: scale(.98);
+}
+
+.radial-ring-container:before {
+	content: "";
+	width: 95%;
+	height: 70%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	
+	background:
+	repeating-radial-gradient(
+		circle at left top,
+		var(--color01) calc(var(--offset) + 12.500% * 01),
+		var(--color02) calc(var(--offset) + 12.500% * 02),
+		var(--color03) calc(var(--offset) + 12.500% * 03),
+		var(--color04) calc(var(--offset) + 12.500% * 04),
+		var(--color05) calc(var(--offset) + 12.500% * 05),
+		var(--color06) calc(var(--offset) + 12.500% * 06),
+		var(--color07) calc(var(--offset) + 12.500% * 07),
+		var(--color08) calc(var(--offset) + 12.500% * 08)
+		/*
+		var(--color09) calc(var(--offset) + 12.500% * 09),
+		var(--color10) calc(var(--offset) + 12.500% * 10),
+		var(--color11) calc(var(--offset) + 12.500% * 11),
+		var(--color12) calc(var(--offset) + 12.500% * 12)
+		*/
+	);
+	
+	background-size: var(--backgroundSize);
+	background-position: var(--backgroundPosition);
+	
+	-webkit-filter: brightness(var(--brightnessAmount)) contrast(var(--contrastAmount)) saturate(var(--saturateAmount)) blur(30px));
+	filter: brightness(var(--brightnessAmount)) contrast(var(--contrastAmount)) saturate(var(--saturateAmount)) blur(30px);
+	z-index: -1;
+	mix-blend-mode: hard-light;
+}
+
+.lightTheme .radial-ring-container::before {
+	mix-blend-mode: multiply;
+}
+
+.radial-ring-container:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: var(--borderRadiusBefore);
+}
+
+.radial-ring-wrapper {
+	position: absolute;
+	content: "";
+	width: 100%;
+	max-width: 175px;
+	height: 100%;
+	max-height: 55px;
+	transition: background 150ms ease;
+	border-radius: var(--borderRadius);
+	overflow: hidden;
+	
+	border-top: 1px solid rgba(0, 0, 0, .6);
+	border-left: 1px solid rgba(0, 0, 0, .6);
+	border-right: 1px solid rgba(0, 0, 0, .6);
+	border-bottom: 2px solid rgba(0, 0, 0, .6);
+	
+	box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 6px 6px hsl(0deg 0% 0% / 0.075);
+}
+
+.radial-ring-color {
+	content: "";
+	width: 150%; /* width set to + blur to make borders no blur */
+	height: 150%; /* height set to + blur to make borders no blur */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+	background:
+	repeating-radial-gradient(
+		circle at left top,
+		var(--color01) calc(var(--offset) + 12.500% * 01),
+		var(--color02) calc(var(--offset) + 12.500% * 02),
+		var(--color03) calc(var(--offset) + 12.500% * 03),
+		var(--color04) calc(var(--offset) + 12.500% * 04),
+		var(--color05) calc(var(--offset) + 12.500% * 05),
+		var(--color06) calc(var(--offset) + 12.500% * 06),
+		var(--color07) calc(var(--offset) + 12.500% * 07),
+		var(--color08) calc(var(--offset) + 12.500% * 08)
+		/*
+		var(--color09) calc(var(--offset) + 12.500% * 09),
+		var(--color10) calc(var(--offset) + 12.500% * 10),
+		var(--color11) calc(var(--offset) + 12.500% * 11),
+		var(--color12) calc(var(--offset) + 12.500% * 12)
+		*/
+	);
+	
+	background-size: var(--backgroundSize);
+	background-position: var(--backgroundPosition);
+	
+	-webkit-filter: brightness(var(--brightnessAmount)) contrast(var(--contrastAmount)) saturate(var(--saturateAmount)) blur(var(--blurAmount));
+	filter: brightness(var(--brightnessAmount)) contrast(var(--contrastAmount)) saturate(var(--saturateAmount)) blur(var(--blurAmount));
+}
+
+.radial-ring-color:before,
+.radial-ring-color:after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.radial-ring-color:before {
+	height: var(--doubleHeight);
+	background:
+	repeating-linear-gradient(
+		var(--backangle),
+		transparent,
+		transparent,
+		rgba(0, 0, 0, .6),
+		transparent,
+		transparent,
+		transparent,
+		rgba(0, 0, 0, .2),
+		transparent var(--doubleHeight)
+	),
+	repeating-linear-gradient(
+		var(--backangle),
+		transparent,
+		transparent,
+		rgba(255, 255, 255, .55),
+		transparent,
+		transparent,
+		rgba(255, 255, 255, .35),
+		transparent,
+		transparent var(--doubleHeight)
+	);
+	
+	background-blend-mode: color-burn, overlay;
+	mix-blend-mode: color-dodge;
+	
+	background-repeat: repeat;
+	background-size:: calc( var(--doubleHeight) / sin(var(--backangle)) ) 100%;
+	animation: moveAccentLights 10s linear infinite;
+}
+
+@keyframes moveAccentLights {
+	100% {
+		background-position: calc( var(--doubleHeight) / sin(var(--backangle)) ) 0%;
+	}
+}
+
+.radial-ring-button {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: hsla(0deg, 0%, 0.78%, .75);
+	
+	display: flex;
+	-webkit-box-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	align-items: center;
+	backface-visibility: hidden;
+	text-shadow: 0px 1px 1px rgba(0, 0, 0, .15);
+	text-rendering: geometricprecision;
+	font-size: 1.1625em;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.radial-ring-button:after {
+	content: "";
+	position: absolute;
+	width: 94%;
+	height: 45%;
+	top: 6%;
+	left: 50%;
+	transform: translate(-50%, -3%);
+	border-radius: .65em .65em 0em 0em;
+	
+	background: 
+	linear-gradient(
+		rgba(255, 255, 255, 0.65), 
+		rgba(255, 255, 255, 0)
+	);
+	z-index: 1;
+	mix-blend-mode: screen;
+}
+
+.radial-ring-button:before {
+	content: "";
+	position: absolute;
+	width: 98%;
+	height: 45%;
+	bottom: 3%;
+	left: 50%;
+	transform: translate(-50%, 0%);
+	border-radius: 0em 0em .65em .65em;
+	
+	background: 
+	linear-gradient( 
+		rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, 0.3)
+	);
+	z-index: 1;
+	mix-blend-mode: color-burn;
+}
